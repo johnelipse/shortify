@@ -1,9 +1,10 @@
-import React from 'react'
+import Home from "@/components/front/home";
+import React from "react";
 
 export default function page() {
   return (
     <div>
-      <p>hey there</p>
+      <Home />
     </div>
-  )
+  );
 }
