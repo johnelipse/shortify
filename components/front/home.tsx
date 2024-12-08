@@ -1,8 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import LinkForm from "../Forms/linkForm";
+import { ShortenedLinkResult } from "./view-link";
+import { ShortenedLink } from "@prisma/client";
 
-export default function Home() {
+export default function Home({
+  localLinks,
+}: {
+  localLinks:
+    | {
+        success: boolean;
+        links: ShortenedLink[];
+        count: number;
+      }
+    | any;
+}) {
+  const links = localLinks?.links || [];
   return (
     <div className="min-h-screen bg-[#020B2C] relative overflow-hidden">
       {/* Decorative elements */}
@@ -23,6 +37,7 @@ export default function Home() {
         </Link>
         <Button
           variant="outline"
+          disabled
           className="bg-[#1A2B6D] text-white border-[#2A3B7D] hover:bg-[#2A3B7D] hover:text-white"
         >
           Refer Friend
@@ -45,13 +60,23 @@ export default function Home() {
             <LinkForm />
           </div>
         </div>
+        <div className="max-w-2xl mt-10 w-full text-center space-y-6">
+          {links.map((link: any) => {
+            return (
+              <ShortenedLinkResult key={link.id} shortUrl={link.shortCode} />
+            );
+          })}
+        </div>
       </main>
 
       {/* Footer */}
       <footer className="absolute bottom-6 left-0 right-0 text-center text-sm text-gray-400">
         <p className="flex items-center justify-center gap-2">
           ⭐ Project By
-          <Link href="#" className="text-white hover:text-[#FF6B6C]">
+          <Link
+            href="https://john-banyweire.vercel.app"
+            className="text-white hover:text-[#FF6B6C]"
+          >
             Banyweire John
           </Link>
         </p>

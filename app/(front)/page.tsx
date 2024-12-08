@@ -1,10 +1,16 @@
+import { fetchAllLinks } from "@/actions/localStorageActions";
 import Home from "@/components/front/home";
 import React from "react";
 
-export default function page() {
+export default async function page() {
+  const localLinks = (await fetchAllLinks()) || {
+    success: false,
+    links: [],
+    count: 0,
+  };
   return (
     <div>
-      <Home />
+      <Home localLinks={localLinks} />
     </div>
   );
 }
