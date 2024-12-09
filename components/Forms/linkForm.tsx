@@ -24,7 +24,6 @@ export default function LinkForm() {
   async function submit(data: FormProps) {
     try {
       setLoading(true);
-      // await shortenLink2(data);
       await shortenLink(data);
       toast.success("Link shortened successfully.");
     } catch (error) {
