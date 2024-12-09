@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { siteConfig } from "@/config/site";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: {
@@ -78,6 +79,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-body`}>
         <Toaster position="top-center" reverseOrder={false} />
+        <Analytics />
         {children}
       </body>
     </html>
