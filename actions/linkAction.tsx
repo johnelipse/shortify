@@ -96,12 +96,12 @@ export async function fetchLinks() {
 export async function fetchSingleLink(
   shortCode: string
 ): Promise<FetchSingleLinkResult> {
-  const cookieStore = cookies();
-  const userId = (await cookieStore).get("userId")?.value;
+  // const cookieStore = cookies();
+  // const userId = (await cookieStore).get("userId")?.value;
 
-  if (!userId) {
-    return { success: false, error: "User not found" };
-  }
+  // if (!userId) {
+  //   return { success: false, error: "User not found" };
+  // }
 
   if (!shortCode) {
     return { success: false, error: "Short code is required" };
@@ -111,7 +111,7 @@ export async function fetchSingleLink(
     const link = await db.shortenedLink.findFirst({
       where: {
         shortCode: shortCode,
-        userId: userId,
+        // userId: userId,
       },
     });
 
