@@ -60,7 +60,7 @@ export default function Home({
           </div>
         </div>
         <div className="max-w-2xl mt-10 w-full text-center space-y-6">
-          {links?.slice(0, 5).map((link: any) => {
+          {links?.slice(0, 1).map((link: any) => {
             return (
               <ShortenedLinkResult
                 key={link.id}
