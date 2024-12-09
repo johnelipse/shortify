@@ -1,4 +1,4 @@
-import { getLinkByShortCode } from "@/actions/localStorageActions";
+import { fetchSingleLink } from "@/actions/linkAction";
 import { redirect } from "next/navigation";
 
 export default async function RedirectPage({
@@ -7,6 +7,6 @@ export default async function RedirectPage({
   params: Promise<{ shortCode: string }>;
 }) {
   const shortCode = (await params).shortCode;
-  const link = await getLinkByShortCode(shortCode);
-  return redirect(link?.longUrl as string);
+  const link = await fetchSingleLink(shortCode);
+  return redirect(link?.data?.longUrl as string);
 }

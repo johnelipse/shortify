@@ -7,10 +7,10 @@ import { useForm } from "react-hook-form";
 import { Loader, ScissorsLineDashed } from "lucide-react";
 import { shortenLink } from "@/actions/linkAction";
 import toast from "react-hot-toast";
-import { shortenLink2 } from "@/actions/localStorageActions";
 import { useRouter } from "next/navigation";
 export type FormProps = {
   longUrl: string;
+  userId: string;
 };
 export default function LinkForm() {
   const {
@@ -24,7 +24,7 @@ export default function LinkForm() {
   async function submit(data: FormProps) {
     try {
       setLoading(true);
-      await shortenLink2(data);
+      // await shortenLink2(data);
       await shortenLink(data);
       toast.success("Link shortened successfully.");
     } catch (error) {
@@ -33,8 +33,9 @@ export default function LinkForm() {
     } finally {
       setLoading(false);
       reset();
+      router.refresh();
+      router.push("/");
       router.prefetch("/");
-      // router.refresh()
     }
   }
 

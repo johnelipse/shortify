@@ -6,17 +6,16 @@ import { ShortenedLinkResult } from "./view-link";
 import { ShortenedLink } from "@prisma/client";
 
 export default function Home({
-  localLinks,
+  linksData,
 }: {
-  localLinks:
-    | {
-        success: boolean;
-        links: ShortenedLink[];
-        count: number;
-      }
-    | any;
+  linksData: {
+    success?: boolean;
+    data?: ShortenedLink[];
+    error?: string;
+  } | null;
 }) {
-  const links = localLinks?.links || [];
+  const links = linksData?.success ? linksData.data : null;
+
   return (
     <div className="min-h-screen bg-[#020B2C] relative overflow-hidden">
       {/* Decorative elements */}
@@ -61,9 +60,13 @@ export default function Home({
           </div>
         </div>
         <div className="max-w-2xl mt-10 w-full text-center space-y-6">
-          {links.map((link: any) => {
+          {links?.map((link: any) => {
             return (
-              <ShortenedLinkResult key={link.id} shortUrl={link.shortCode} />
+              <ShortenedLinkResult
+                key={link.id}
+                initialViews={link.views}
+                shortUrl={link.shortCode}
+              />
             );
           })}
         </div>

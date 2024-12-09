@@ -16,6 +16,8 @@ datasource db {
 model ShortenedLink {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   longUrl     String
+  userId      String?
+  views       Int   @default(0)
   shortCode   String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
