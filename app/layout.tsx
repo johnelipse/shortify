@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     default: siteConfig.title,
     template: `%s - ${siteConfig.title}`,
   },
+  other: {
+    "google-site-verification": "Sr5RR1ysT1vii9jDI2fm5p3Rbq-UeQPPYQK_p-7U3bU",
+  },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
   keywords: [
