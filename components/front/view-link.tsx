@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { CircleCheckBig, Copy, Eye } from "lucide-react";
-import { incrementClickCount } from "@/actions/linkAction";
-import { useRouter } from "next/navigation";
 
 interface ShortenedLinkResultProps {
   shortUrl: string;
@@ -38,26 +36,26 @@ export function ShortenedLinkResult({
       toast.error("failed to copy link.");
     }
   };
-  const router = useRouter();
-  const [views, setViews] = useState(initialViews);
+  // const router = useRouter();
+  // const [views, setViews] = useState(initialViews);
 
-  const handleLinkClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const result = await incrementClickCount(shortUrl);
-    if (result.success) {
-      setViews(result.views);
-      window.open(fullUrl, "_blank");
-      router.refresh();
-    } else {
-      toast.error("Failed to update view count.");
-    }
-  };
+  // const handleLinkClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   e.preventDefault();
+  //   const result = await incrementClickCount(shortUrl);
+  //   if (result.success) {
+  //     setViews(result.views);
+  //     window.open(fullUrl, "_blank");
+  //     router.refresh();
+  //   } else {
+  //     toast.error("Failed to update view count.");
+  //   }
+  // };
 
   return (
     <div className="mt-6 py-2 px-4 bg-white/10  rounded-lg flex items-center justify-between">
       <Link
         href={shortUrl}
-        onClick={handleLinkClick}
+        // onClick={handleLinkClick}
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-400 hover:underline text-[0.9rem] md:text-[1rem] truncate mr-2"
@@ -79,7 +77,7 @@ export function ShortenedLinkResult({
         </Button>
         <div className="flex items-center gap-1 text-white">
           <Eye className="w-4 h-4" />
-          {views}
+          {initialViews}
         </div>
       </div>
     </div>

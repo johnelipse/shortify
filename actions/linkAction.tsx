@@ -5,6 +5,7 @@ import { FormProps } from "@/components/Forms/linkForm";
 import { db } from "@/lib/db";
 import { ShortenedLink } from "@prisma/client";
 import { nanoid } from "nanoid";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 interface FetchSingleLinkResult {
   success: boolean;
@@ -57,6 +58,7 @@ export async function shortenLink(data: FormProps) {
         userId: user,
       },
     });
+    revalidatePath("/");
     return {
       success: true,
       shortUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/${shortenedLink.shortCode}`,
@@ -124,7 +126,9 @@ export async function incrementClickCount(shortCode: string) {
       where: { shortCode },
       data: { views: { increment: 1 } },
     });
-    return { success: true, views: updatedLink.views };
+
+    revalidatePath("/");
+    return updatedLink.views;
   } catch (error) {
     console.error("Error incrementing click count:", error);
     return { success: false, error: "Failed to update click count" };
