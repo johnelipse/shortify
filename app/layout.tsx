@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   },
   other: {
     "google-site-verification": "Sr5RR1ysT1vii9jDI2fm5p3Rbq-UeQPPYQK_p-7U3bU",
+    "google-adsense-account": "ca-pub-5823452511055640",
   },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
